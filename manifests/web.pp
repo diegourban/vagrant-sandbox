@@ -2,7 +2,7 @@ exec { "apt-update":
   command => "/usr/bin/apt-get update"
 }
 
-package { ["openjdk-7-jre", "tomcat7"]:
+package { ["openjdk-7-jre", "tomcat7", "mysql-server"]:
   ensure => installed,
   require => Exec["apt-update"]
 }
@@ -13,6 +13,28 @@ service { "tomcat7":
     hasstatus => true,
     hasrestart => true,
     require => Package["tomcat7"]
+}
+
+service { "mysql":
+    ensure => running,
+    enable => true,
+    hasstatus => true,
+    hasrestart => true,
+    require => Package["mysql-server"]
+}
+
+exec { "musicjungle":
+  command => "mysqladmin -uroot create musicjungle",
+  unless => "mysql -uroot musicjungle",
+  path => "/usr/bin",
+  require => Service["mysql"]
+}
+
+exec { "mysql-password":
+  command => "mysql -uroot -e \"GRANT ALL PRIVILEGES ON * TO 'musicjungle'@'%' IDENTIFIED BY 'minha-senha';\" musicjungle"
+  path => "/usr/bin",
+  unless  => "mysql -umusicjungle -pminha-senha musicjungle",
+  require => Exec["musicjungle"]
 }
 
 file { "/var/lib/tomcat7/webapps/vraptor-musicjungle.war":
