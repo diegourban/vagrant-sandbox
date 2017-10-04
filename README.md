@@ -1,13 +1,23 @@
 # vagrant-sandbox
 
-```vagrant destroy``` - to destroy de vm
+## Requirements
 
-```vagrant up``` - to start the vm
+* Vagrant
+* VirtualBox
+* Ubuntu 32 box, available at http://files.vagrantup.com/precise32.box
 
-```vagrant ssh``` - to connect with ssh
+## Installation
 
-```sudo puppet apply /vagrant/manifests/web.pp``` - to run tasks with puppet
+```vagrant up``` - to start the VM
+
+```vagrant destroy``` - to destroy the VM
+
+```vagrant ssh``` - to connect to the VM with ssh
+
+```sudo puppet apply /vagrant/manifests/web.pp``` - to run config tasks with puppet
+
+## Usage
 
 ```http://192.168.50.10:8080``` - open tomcat
 
-```http://192.168.50.10:8080/vraptor-musicjungle ``` - access app
+```http://192.168.50.10:8080/vraptor-musicjungle ``` - access the deployed app

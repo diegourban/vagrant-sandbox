@@ -31,7 +31,7 @@ exec { "musicjungle":
 }
 
 exec { "mysql-password":
-  command => "mysql -uroot -e \"GRANT ALL PRIVILEGES ON * TO 'musicjungle'@'%' IDENTIFIED BY 'minha-senha';\" musicjungle"
+  command => "mysql -uroot -e \"GRANT ALL PRIVILEGES ON * TO 'musicjungle'@'%' IDENTIFIED BY 'minha-senha';\" musicjungle",
   path => "/usr/bin",
   unless  => "mysql -umusicjungle -pminha-senha musicjungle",
   require => Exec["musicjungle"]
