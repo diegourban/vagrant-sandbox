@@ -12,6 +12,8 @@
 
 ```vagrant destroy``` - to destroy the VM
 
+```vagrant destroy``` - to reload configs
+
 ```vagrant ssh``` - to connect to the VM with ssh
 
 ```sudo puppet apply /vagrant/manifests/web.pp``` - to run config tasks with puppet
